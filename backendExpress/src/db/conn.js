@@ -1,5 +1,6 @@
 const mongoose =require ("mongoose")
-mongoose.connect("mongodb://localhost:27017/registration")
+mongoose.set("strictQuery",false)
+mongoose.connect("mongodb://localhost:27017/demos")
 .then((e)=>{
     console.log('connecetd')
 }).catch((e)=>{

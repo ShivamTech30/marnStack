@@ -47,7 +47,7 @@ const SignUp = () => {
     //     : phonenumber
     //       ?
     axios
-      .post(`${process.env.REACT_APP_BASE_URL}/register`,
+      .post(`http://localhost:3003/register`,
         {
           name,
           number: phonenumber,
@@ -61,6 +61,7 @@ const SignUp = () => {
 
       .then((Response) => {
         console.log(Response)
+        navigate("/login")
         // if(Businessdetails === "as_business"){
         //   navigate("/page/kyc")
         // }else{

@@ -80,6 +80,7 @@ const Order = () => {
   const navigate = useNavigate();
 
   let param = useLocation();
+  
   const GetAdminOrderIntransitDate = useSelector(
     (state) =>
       state.GetAdminOrderIntransitReducer.GetAdminOrderIntransitData?.data

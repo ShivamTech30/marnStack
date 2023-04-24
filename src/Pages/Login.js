@@ -36,14 +36,18 @@ const Login = () => {
     // setLoadSpiner((o) => !o);
 
     await axios
-      .post(`${process.env.REACT_APP_BASE_URL}/login`, {
+      .post(`http://localhost:3003/login`, {
         email,
         password
       })
       .then((Response) => {
+        console.log("nsgdvhsddk",Response)
+          reactLocalStorage.set("token", Response?.data.token);
 
+        navigate("/ecommerce/addproduct")
         // setLoadSpiner((o) => !o);
         toast.success("Login SuccessFully")
+
 
 
       })

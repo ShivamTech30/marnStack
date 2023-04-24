@@ -846,6 +846,21 @@ ol {
   padding-top: 6px;
   font-size: 18px;
 }
+.data_picker_btn  {
+  float: right;
+  border-radius: 5px;
+  width: 90px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  border: none;
+  color: white;
+  background-color: #E7BC1C;
+  outline-color: transparent;
+  padding-bottom: 7px;
+  padding-top: 6px;
+  font-size: 18px;
+}
 
 .data_picker .rdrDateRangePickerWrapper {
   overflow: auto;
@@ -2418,21 +2433,23 @@ css-1hb7zxy-IndicatorsContainer
 }
 
 .next-btn {
-  color: #fff;
-  font-size: 14px;
+   font-size: 14px;
   font-weight: 600;
-  border: 1px solid #000;
-  background-color: #000;
+  border: 1px solid #f2e207;
+   
   width: 100%;
   max-width: 90%;
   display: block;
   border-radius: 50px;
   margin: 25px auto;
+  color: #4b4a4a;
+  background-color: #f2e207;
 }
 
 .next-btn:hover {
-  color: #000;
-  background-color: #fff;
+  background-color: #000;
+  color: #fff;
+
 
 }
 

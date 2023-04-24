@@ -94,7 +94,10 @@ import {
   ToggleSideBarTrueFalseReducer,
   GetAuthDetailsReducer,
   GetPermissionReducer,
-  GetGoogleCityStateReducer
+  GetGoogleCityStateReducer,
+  ///////////////////
+  PostAddProductReducer,
+  GetAllProductReducer,
  
 } from "./Reducer";
 
@@ -196,7 +199,10 @@ const rootReducer = combineReducers({
   ToggleSideBarTrueFalseReducer,
   GetAuthDetailsReducer,
   GetPermissionReducer,
-  GetGoogleCityStateReducer
+  GetGoogleCityStateReducer,
+  ///////////////////////////
+  PostAddProductReducer,
+  GetAllProductReducer,
   
 
 

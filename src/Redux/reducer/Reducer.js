@@ -99,9 +99,13 @@ const stateData = {
   ShipmentLoaderTrueFalseData: true,
   GetUserNotificationData: [],
   ToggleSideBarTrueFalseData: true,
-  GetAuthDetailsData: [], 
-  GetPermissionData:[],
-  GetGoogleCityStateData:[]
+  GetAuthDetailsData: [],
+  GetPermissionData: [],
+  GetGoogleCityStateData: [],
+  /////////////////////////////////////
+
+  PostAddProductData: [],
+  GetAllProductData: [],
 };
 
 export const productReducer = (state = stateData, action) => {
@@ -1375,5 +1379,46 @@ export const GetGoogleCityStateReducer = (state = stateData, action) => {
   }
 };
 
+//////////////////////////
+// PostAddProductData
+
+export const PostAddProductReducer = (state = stateData, action) => {
+  switch (action.type) {
+    case actionType.PostAddProductDispatch_Type:
+      return {
+        ...state,
+        PostAddProductData: action.payload,
+
+      };
+    default:
+      return state;
+  }
+};
 
 
+export const GetAllProductReducer = (state = stateData, action) => {
+  switch (action.type) {
+    case actionType.GetAllProductDispatch_Type:
+      return {
+        ...state,
+        GetAllProductData: action.payload,
+
+      };
+
+    default:
+      return state;
+  }
+};
+
+// export const GetAllProductReducer = (state = stateData, action) => {
+//   switch (action.type) {
+//     case actionType.GetAllProductDispatch_Type:
+//       return {
+//         ...state,
+//         GetAllProductData: action.payload,
+
+//       };
+//     default:
+//       return state;
+//   }
+// };

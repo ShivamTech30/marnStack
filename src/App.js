@@ -63,6 +63,9 @@ import * as Sentry from "@sentry/react";
 import Blogs from "./BlogsPage/Blogs";
 import BlogsShweta from "./BlogsPage/BlogsShweta";
 import BlogsIshita from "./BlogsPage/BlogsIshita";
+import AddProducts from "./Ecomerce/AddProducts";
+import ProductDetails from "./Ecomerce/ProductDetails";
+import WishListDetails from "./Ecomerce/WishListDetails";
 
 
 function App() {
@@ -142,6 +145,14 @@ function App() {
         <Route path="/admin/support" element={<Support />} />
         <Route path="/admin/accounting" element={<Accounting/>} />
         <Route path="/admin/invoice" element={<Invoice />} /> */}
+
+
+
+        <Route path="/ecommerce/addproduct" element={<AddProducts />}></Route>
+        <Route path="/ecommerce/productdetails" element={<ProductDetails />}></Route>
+        <Route path="/ecommerce/wishlist" element={<WishListDetails/>}></Route>
+
+
 
       </Routes>
       <ToastContainer autoClose={2000} />

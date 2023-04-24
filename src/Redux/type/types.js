@@ -96,5 +96,12 @@ export const actionType = {
     ToggleSideBarTrueFalse_Type:"ToggleSideBarTrueFalse_Type",
     GetAuthDetailsDispatch_Type: "GetAuthDetailsDispatch_Type",
     GetPermissionDispatch_Type: "GetPermissionDispatch_Type",
-    GetGoogleCityStateDispatch_Type:"GetGoogleCityStateDispatch_Type"
+    GetGoogleCityStateDispatch_Type:"GetGoogleCityStateDispatch_Type",
+    // ///////////////////////////////////////////
+
+
+    PostAddProductDispatch_Type:"PostAddProductDispatch_Type",
+    GetAllProductDispatch_Type:"GetAllProductDispatch_Type",
+     
+
 }

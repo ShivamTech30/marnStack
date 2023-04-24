@@ -3223,7 +3223,7 @@ export const GetGoogleCityState = (payload) => {
   return async (dispatch, getState) => {
     console.log("payloadsjkdgh", process.env.REACT_APP_BASE_GOOGLE_API_KEY)
 
-    
+
     const response = await axios
       .get(` https://maps.googleapis.com/maps/api/geocode/json?address=${payload}&key=${process.env.REACT_APP_BASE_GOOGLE_API_KEY}`,)
       .then((res) => {
@@ -3274,3 +3274,152 @@ export const GetGoogleCityState = (payload) => {
 //     .catch((err) => {
 //         console.log(err);
 //         return
+
+
+// let headersList = {
+//   "Authorization": `Bearer  ${BearerToken}`
+// }
+
+let headersList = {
+  "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDMwMjY1ZjBjMmFlNmM3MGI0YTU5ZWMiLCJpYXQiOjE2ODA5MzgxMDh9.iPFGiSxu9sY88b1XMn-l4CcXQEtptIeJh7FyWoU-F1w"
+}
+
+
+const PostAddProductDispatch = (data) => ({
+  type: actionType.PostAddProductDispatch_Type,
+  payload: data,
+});
+export const PostAddProduct = (payload) => {
+  console.log("add_productpayload", payload);
+
+
+
+  return async (dispatch, getState) => {
+    const responce = await axios
+      .post(
+        `${process.env.REACT_APP_BASE_URL}/add_product`,
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer `,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+
+        toast.success("Product is created successfully");
+        // if(res.data.message !=='Pin code not available'){
+        //     toast.success(res.data.message);
+        // }
+        // else{
+        //     toast.error(res.data.message);
+        // }
+
+        return res;
+      })
+      .catch((err) => {
+        toast.warn(err.response.data.message);
+        console.log(err);
+        return err.response;
+      });
+    dispatch(PostAddProductDispatch(responce));
+  };
+};
+
+
+
+
+const GetAllProductDispatch = (data) => ({
+  type: actionType.GetAllProductDispatch_Type,
+  payload: data,
+});
+  
+export const GetAllProduct = (payload) => {
+  return async (dispatch, getState) => {
+    const responce = await axios
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/all_product`,
+        {
+          headers: {
+            Authorization: `Bearer ${BearerToken}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log("nvgshvsjhhvhs",res);
+        toast.warn(res.data.message);
+        return res;
+      })
+      .catch((err) => {
+        toast.warn(err.response.data.message);
+        console.log(err);
+        return err;
+      });
+    dispatch(GetAllProductDispatch(responce));
+  };
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// export const GetAllProduct = (method, endpoint, payload) => {
+//   console.log("jhcg", endpoint)
+//   let endPointData = endpoint?.split("/")
+//   let dataEndPointData = endPointData.pop()
+//   // console.log("endPointData",endPointData.pop())
+
+//   let reqOptions = {
+//     url: `${process.env.REACT_APP_BASE_URL}${endpoint}`,
+//     method: `${method}`,
+//     headers: headersList,
+//   }
+//   return async (dispatch, getState) => {
+//     try {
+//       var response = await axios.request(reqOptions);
+       
+//     }
+//     catch (err) {
+//       toast.warn(err.response.data.message);
+//       console.log("shgvdhv", err);
+
+//     }
+//     console.log("shgvdhv",response)
+    // const response = await axios
+    //   .request(`${process.env.REACT_APP_BASE_URL}/all_product`,
+
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${BearerToken}`,
+    //       }
+    //     }
+    //   )
+    //   .then((res) => {
+    //     console.log("jhxhgjhsgjkh", res)
+    //     return res;
+
+    //   })
+    //   .catch((err) => {
+    //     // toast.warn(err.response.data.message);
+    //     // console.log(err);
+    //     return err;
+    //   });
+    // dispatch({
+    //   type: `${actionType}.${dataEndPointData}_Type`,
+    //   payload: response,
+      
+    // });
+    // dispatch(GetAllProductDispatch(response));
+//   };
+// };
+

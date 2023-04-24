@@ -72,3 +72,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 local storage 
 order_id is ,when you click on row then we save order id
 product_order_id is when we generate the id for clone order
+
+lookup= lookup is for get data from multiple collection 
