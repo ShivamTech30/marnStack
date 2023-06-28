@@ -6,19 +6,38 @@ require("./src/db/conn")
 const Register = require("./src/model/registor")
 const bcrypt = require("bcryptjs");
 const Product = require('./src/model/registor');
-
+//  
 app.use(cors())
 app.use(express.json())
 const port = process.env.PORT || 3003
 
+//####### REDIS ########
+const redis = require('redis')
+// const redisClient =redis.createClient(6379,"127.0.0.1") this will take as default
+const redisClient = redis.createClient(6379, "127.0.0.1")
+
+// const redisClient =redis.createClient({
+//     port:"any port",
+//     host :"any "
+// })  this you can make coustome
+
+
+// check redis is connected or not 
+redisClient.connect()
+
+redisClient.on("connect", function (error) {
+    console.log("redis is connecetd")
+})
+
 
 const register = require("./src/routers/login")
-const add_product = require("./src/routers/login") 
-const all_product = require("./src/routers/login")
+const add_product = require("./src/routers/login")
+const all_product = require("./src/routers/login");
+const { Result } = require('antd');
 
-app.use("/",register)
-app.use("/",add_product)
-app.use("/",all_product)
+app.use("/", register)
+app.use("/", add_product)
+app.use("/", all_product)
 
 
 console.log("hjbdjhebhj")
@@ -50,6 +69,30 @@ console.log("hjbdjhebhj")
 
 app.post("/login", async (req, res) => {
     try {
+
+        //start redis Check 
+        // let anykeyName="fname"
+        // let getCacheData =await redisClient.get(anykeyName)
+        // console.log("xscd",getCacheData)
+        // let object ={
+        //     name:"shivam",
+        //     age:"25"
+        // }
+
+        // let responseArray=""
+        // if(getCacheData){
+        //     responseArray=JSON.parse(getCacheData)
+        //     console.log("GET    cache")
+        // }else{
+        //     console.log("set cache")
+        //     redisClient.set(keyName,JSON.stringify(object),{EX:30})
+        //     responseArray=object
+        // }
+
+
+        //end redis Check 
+
+
         const email = req.body.email
         const password = req.body.password
         const details = await Register.findOne({ email: email })
@@ -86,5 +129,6 @@ app.post("/login", async (req, res) => {
 
 
 app.listen(port, () => {
+
     console.log(`conncted with that port ${port}`)
 })

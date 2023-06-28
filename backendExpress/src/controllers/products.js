@@ -21,9 +21,29 @@ exports.productDetails = catchAsyncErrors(async (req, res, next) => {
 })
 
 exports.allProductDetails = catchAsyncErrors(async (req, res, next) => {
+
     try {
         const userId = req.user._id
-        const ProductDetails = await Product.find().lean().exec();
+        const userQurey = req.query.sorting;
+// console.log("sjghdvvjs")
+
+        // var ProductDetails = ""
+
+        if (userQurey == "asending") {
+            var  ProductDetails = await Product.find().sort({   product_price: 1 }).lean().exec();
+
+
+        }
+        else if (userQurey == "decending") {
+            var  ProductDetails = await Product.find().sort({  product_price: -1 }).lean().exec();
+
+        }
+        else {
+            var   ProductDetails = await Product.find().sort({ createdAt: -1}).lean().exec();
+
+        }
+
+
         const CartProductDetails = await CartProduct.find({ userId: userId, addToCart: true }).lean().exec()
 
         // const startTime = performance.now() //performance check 
@@ -51,8 +71,7 @@ exports.allProductDetails = catchAsyncErrors(async (req, res, next) => {
                 if (ProductDetails[i]._id.toString() !== CartProductDetails[j].product_id.toString()
                     && !ProductDetails[i]['fav']) {
                     ProductDetails[i]['fav'] = false
-                    ProductDetails[i]['UserId'] = userId
-                    //   console.log(id)
+                    ProductDetails[i]['UserId'] = userId 
 
                 }
             }

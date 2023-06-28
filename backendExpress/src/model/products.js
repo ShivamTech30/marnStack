@@ -8,7 +8,7 @@ const product = new Schema({
         required: true
     },
     product_price: {
-        type: String,
+        type: Number,
         required: true
     },
     product_brand: {
@@ -21,7 +21,16 @@ const product = new Schema({
         required: true
 
     },
+    fav: {
+        type: Boolean,
+        required: true,
+        default:false
+
+    },
     
+    
+},{
+    timestamps:true
 })
 
 
