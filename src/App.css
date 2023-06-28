@@ -17,7 +17,23 @@
      animation: App-logo-spin infinite 20s linear;
    }
  }
+.deleteIcon{
+  height: 25px;
+}
 
+.main_product_div{
+  height: 500px;
+  background-color: white;
+  margin-right: 4%;
+  margin-left: 4%;
+  margin-bottom: 5%;
+
+}
+
+.main_product_div img{
+  width: 90%;
+  height: 240px
+}
  .App-header {
    background-color: #282c34;
    min-height: 100vh;

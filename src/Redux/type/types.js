@@ -103,5 +103,6 @@ export const actionType = {
     PostAddProductDispatch_Type:"PostAddProductDispatch_Type",
     GetAllProductDispatch_Type:"GetAllProductDispatch_Type",
      
-
+    PatchCartDispatch_Type:"PatchCartDispatch_Type",
+    DeleteCartDispatch_Type:"DeleteCartDispatch_Type",
 }

@@ -98,6 +98,8 @@ import {
   ///////////////////
   PostAddProductReducer,
   GetAllProductReducer,
+  PatchCartReducer,
+  DeleteCartReducer,
  
 } from "./Reducer";
 
@@ -203,7 +205,8 @@ const rootReducer = combineReducers({
   ///////////////////////////
   PostAddProductReducer,
   GetAllProductReducer,
-  
+  PatchCartReducer,
+  DeleteCartReducer
 
 
 });

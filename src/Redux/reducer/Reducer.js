@@ -106,6 +106,9 @@ const stateData = {
 
   PostAddProductData: [],
   GetAllProductData: [],
+
+  PatchCartData:[],
+  DeleteCartData:[],
 };
 
 export const productReducer = (state = stateData, action) => {
@@ -1402,6 +1405,35 @@ export const GetAllProductReducer = (state = stateData, action) => {
       return {
         ...state,
         GetAllProductData: action.payload,
+
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const PatchCartReducer = (state = stateData, action) => {
+  switch (action.type) {
+    case actionType.PatchCartDispatch_Type:
+      return {
+        ...state,
+        PatchCartData: action.payload,
+
+      };
+
+    default:
+      return state;
+  }
+};
+
+
+export const DeleteCartReducer = (state = stateData, action) => {
+  switch (action.type) {
+    case actionType.DeleteCartDispatch_Type:
+      return {
+        ...state,
+        DeleteCartData: action.payload,
 
       };
 

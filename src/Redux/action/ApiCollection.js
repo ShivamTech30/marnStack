@@ -3301,7 +3301,7 @@ export const PostAddProduct = (payload) => {
         payload,
         {
           headers: {
-            Authorization: `Bearer `,
+            Authorization: `Bearer ${BearerToken}`,
           },
         }
       )
@@ -3337,9 +3337,16 @@ const GetAllProductDispatch = (data) => ({
   
 export const GetAllProduct = (payload) => {
   return async (dispatch, getState) => {
+    let data=""
+    if(payload==undefined){
+      data=""
+    }
+    else{
+      data=payload
+    }
     const responce = await axios
       .get(
-        `${process.env.REACT_APP_BASE_URL}/all_product`,
+        `${process.env.REACT_APP_BASE_URL}/all_product${data}`,
         {
           headers: {
             Authorization: `Bearer ${BearerToken}`,
@@ -3361,6 +3368,70 @@ export const GetAllProduct = (payload) => {
 };
 
 
+const PatchCartDispatch = (data) => ({
+  type: actionType.PatchCartDispatch_Type,
+  payload: data,
+});
+  
+export const PatchCart = (payload) => {
+  return async (dispatch, getState) => {
+    const responce = await axios
+      .patch(
+        `${process.env.REACT_APP_BASE_URL}/patch_cart/${payload?._id}`,
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${BearerToken}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log("nvgshvsjhhvhssjdffjd",res);
+        toast.warn(res.data.message);
+        return res;
+      })
+      .catch((err) => {
+        toast.warn(err.response.data.message);
+        console.log(err);
+        return err;
+      });
+    dispatch(PatchCartDispatch(responce));
+  };
+};
+
+
+
+const DeleteCartDispatch = (data) => ({
+  type: actionType.DeleteCartDispatch_Type,
+  payload: data,
+});
+  
+export const DeleteCart = (payload) => {
+  return async (dispatch, getState) => {
+    const responce = await axios
+      .delete(
+        `${process.env.REACT_APP_BASE_URL}/delete_product/${payload?._id}`, 
+        {
+          headers: {
+            Authorization: `Bearer ${BearerToken}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log("nvgshvsjhhvhssjdffjd",res);
+        toast.success("Product deleted Sucessfully");
+dispatch(GetAllProduct())
+        // toast.warn(res.data.message);
+        return res;
+      })
+      .catch((err) => {
+        // toast.warn(err.response.data.message);
+        console.log(err);
+        return err;
+      });
+    dispatch(DeleteCartDispatch(responce));
+  };
+};
 
 
 
