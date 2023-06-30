@@ -2,7 +2,7 @@ const mongoose =require ("mongoose")
 mongoose.set("strictQuery",false)
 
 
-mongoose.connect("mongodb://localhost:27017/demos")
+mongoose.connect("mongodb+srv://EcommerceWeb:EcommerceWeb123@cluster0.rqasgf4.mongodb.net/Ecommerce")
 .then((e)=>{
     console.log('connecetd')
 }).catch((e)=>{
