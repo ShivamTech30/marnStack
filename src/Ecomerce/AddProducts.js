@@ -22,23 +22,20 @@ const AddProducts = () => {
 
     const AddProductFun = () => {
 
-        const formData = new FormData();
-        formData.append("product_name", ProductName);
-        formData.append("product_price", ProductPrice);
-        formData.append("product_brand", ProductBrand);
-        formData.append("productImage", ProductImage);
+        
 
         let addProductPayload = {
-            // "product_name": ProductName,
-            // "product_price": ProductPrice,
-            // "product_brand": ProductBrand,
-            // "product_image": ProductImage
+            "product_name": ProductName,
+            "product_price": ProductPrice,
+            "product_brand": ProductBrand,
+            "productImage": ProductImage,
+            "fav":false
         }
 
-        dispatch(PostAddProduct(formData))
+        dispatch(PostAddProduct(addProductPayload))
     }
 
-    console.log("sgdjgdjhgsj",ProductImage)
+     
 
 
     return (

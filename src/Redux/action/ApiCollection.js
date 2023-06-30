@@ -3295,10 +3295,17 @@ export const PostAddProduct = (payload) => {
 
 
   return async (dispatch, getState) => {
-    const responce = await axios
+
+    const formData = new FormData();
+    formData.append("product_name", payload?.product_name);
+    formData.append("product_price", payload?.product_price);
+    formData.append("product_brand", payload?.product_brand);
+    formData.append("productImage", payload?.productImage);
+    formData.append("fav", false); 
+    const response = await axios
       .post(
         `${process.env.REACT_APP_BASE_URL}/add_product`,
-        payload,
+        formData,
         {
           headers: {
             Authorization: `Bearer ${BearerToken}`,
@@ -3323,7 +3330,9 @@ export const PostAddProduct = (payload) => {
         console.log(err);
         return err.response;
       });
-    dispatch(PostAddProductDispatch(responce));
+
+    
+    dispatch(PostAddProductDispatch(response));
   };
 };
 
