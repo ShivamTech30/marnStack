@@ -11,8 +11,9 @@ const employeeSchema = new Schema({
     number: { type: Number, required: true, min: 10 },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true, },
-    confirmpassword: { type: String, required: true, },
-    // tokens: [{ token: { type: String, required: true, } }]
+    confirmpassword: { type: String, required: true, }, 
+    role:[{type: String}]
+        // tokens: [{ token: { type: String, required: true, } }]
 })
 
  

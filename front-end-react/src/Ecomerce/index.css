@@ -1,0 +1,124 @@
+.comment-message-main {
+    margin-top: 20px;
+    height: 150px;
+    overflow-y: scroll;
+}
+
+.comment-list {
+    background-color: rgb(79, 77, 77);
+    color: white;
+    padding-bottom: 10px;
+}
+
+.comment-list p {
+    padding: 0px;
+    margin: 0px;
+}
+
+.user-name {
+    font-size: 14px;
+    margin-left: 10px !important;
+    padding-top: 10px !important;
+}
+
+.user-message {
+    font-size: 16px;
+    margin-left: 10px !important;
+
+}
+
+.reply-text {
+    font-size: 11px;
+    margin-left: 10px !important;
+}
+
+.allproduct-main-row .col-sm-5 {
+    background-color: rgb(235 235 235);
+}
+
+.main_product_div {
+    max-height: 100%;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    margin-right: 2%;
+    margin-left: 4%;
+    margin-bottom: 5%;
+    padding: 10px 10px 10px 10px;
+
+}
+
+.main_product_div img {
+    width: 100%;
+    height: 240px
+}
+
+.main-poster-image {
+    position: relative;
+    
+}
+.main-poster-image video{
+    min-width: 100% !important;
+     
+}
+::-webkit-resizer{
+    aspect-ratio: 100% !important;
+
+}
+
+.favrate-icon {
+    position: absolute;
+    top: 7px;
+    left: 88%;
+
+}
+
+.asending-btn .btn,
+.decending-btn .btn {
+
+
+    color: whitesmoke !important;
+    margin: 10px;
+    /* justify-items: center; */
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: space-between;
+}
+
+.comment-input-main-div {
+     
+    /* height: 60px; */
+}
+
+.comment-input-main-div input {
+    display: flex;
+    height: 50px;
+    width: 70%;
+    border-radius: 5px;
+}
+
+.comment-input-main-div .comment-btn {
+    margin-left: 10px;
+    margin-top: 5px;
+    width:90%
+}
+.close-reply{
+    float: right;
+    width: 33%;
+}
+.reply-chat-main{
+    padding-left: 10%;
+ }
+.main-view-more-comment{
+    display: flex;
+}
+.main-view-more-comment .view-line{ 
+    width: 30px !important; 
+    padding-left: 10px;
+}
+.main-view-more-comment .view-text{ 
+     margin-left: 7px;
+     /* padding-left: 4px; */
+     margin-top: 5px;
+     font-size: 13px;
+}

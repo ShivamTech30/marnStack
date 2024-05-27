@@ -6,6 +6,7 @@ require("./src/db/conn")
 const Register = require("./src/model/registor")
 const bcrypt = require("bcryptjs");
 const Product = require('./src/model/registor');
+const rolesModel =require("./src/model/rolesModel")
 //  
 app.use(cors())
 app.use(express.json())
@@ -30,76 +31,32 @@ redisClient.on("connect", function (error) {
 })
 
 
-const register = require("./src/routers/login")
-const add_product = require("./src/routers/login")
-const all_product = require("./src/routers/login");
-const { Result } = require('antd');
+const register = require("./src/routers/_routes")
+const add_product = require("./src/routers/_routes")
+const all_product = require("./src/routers/_routes");
+// const add_role = require("./src/routers/_routes");
+
+
+// const { Result } = require('antd');
 
 app.use("/", register)
 app.use("/", add_product)
 app.use("/", all_product)
-
-
-console.log("hjbdjhebhj")
-
-// app.post("/register", async (req, res) => {
-//     try {
-//         const data = new Register(req.body)
-//         if (req.body.password === req.body.confirmpassword) {
-//             const token = await data.generateAuthToken()
-//             const userDetails = await data.save();
-//             // res.status(201).json({data:userDetails}) 
-//             res.status(201).send({
-//                 "data": userDetails,
-//                 "message": "successful",
-//                 "token": token
-//             })
-//         }
-//         else {
-//             res.status(404).send("password in not matched")
-//         }
-
-//     } catch (e) {
-
-//         res.status(400).send(req.body)
-//     }
-
-// })
-
+// app.use("/", add_role) 
 
 app.post("/login", async (req, res) => {
-    try {
-
-        //start redis Check 
-        // let anykeyName="fname"
-        // let getCacheData =await redisClient.get(anykeyName)
-        // console.log("xscd",getCacheData)
-        // let object ={
-        //     name:"shivam",
-        //     age:"25"
-        // }
-
-        // let responseArray=""
-        // if(getCacheData){
-        //     responseArray=JSON.parse(getCacheData)
-        //     console.log("GET    cache")
-        // }else{
-        //     console.log("set cache")
-        //     redisClient.set(keyName,JSON.stringify(object),{EX:30})
-        //     responseArray=object
-        // }
-
-
-        //end redis Check 
-
-
+    try { 
         const email = req.body.email
         const password = req.body.password
         const details = await Register.findOne({ email: email })
         const match = await bcrypt.compare(password, details.password)
         const token = await details.generateAuthToken()
+
+        const roles=details.role
+        const permission =await rolesModel.findOne({role:roles})
+
         if (match) {
-            res.status(200).send({ details, token })
+            res.status(200).send({ details, token,permission:permission })
         }
         else {
             res.status(404).send("INVALID LOGIN DETAILS")
@@ -110,19 +67,7 @@ app.post("/login", async (req, res) => {
 
 })
 
-
-// app.post("/add_product", async (req, res) => {
-//     try {
-//         const data = new Product(req.body)
-//         const userDetails = await data.save();
-//         res.status(201).send({
-//             "data": userDetails,
-//         })
-//     }
-//     catch (e) {
-//         res.status(400).send(req.body)
-//     }
-// })
+ 
 
 
 

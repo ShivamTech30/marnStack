@@ -16,11 +16,12 @@ exports.isAuthenticatedUser = catchAsynErrors(async (req, res, next) => {
 
     const decodedData = jwt.verify(Rowtoken, process.env.SECRET_KEY);
     req.user = await User.findById(decodedData._id);
+    next();
   }
   catch (error) {
     res.status(401).json("invalid token")
   }
-  next();
+   
 })
 
 exports.authorizeRole = (...roles) => {

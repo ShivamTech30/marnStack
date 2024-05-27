@@ -3,8 +3,22 @@ const cloudinary = require("../cloudinary/cloudinary")
 const catchAsyncErrors = require("../middleware/catchAsynErrors");
 const CartProduct = require("../model/cartProducts");
 
-exports.productDetails = catchAsyncErrors(async (req, res, next) => {
-    const result = await cloudinary.uploader.upload(req.file.path);
+exports.productDetails = catchAsyncErrors(async (req, res, next) => { 
+   try { 
+
+   
+
+    const result = await cloudinary.uploader.upload(req.file.path,{
+        folder: 'samples/animals',
+        resource_type: 'auto'});
+    // console.log(result)
+
+
+    
+
+    console.log("xbchgvjckd-------",result)
+
+
     const { product_name, product_price, product_brand } = req.body
     const product = await Product.create({
         product_name,
@@ -18,6 +32,9 @@ exports.productDetails = catchAsyncErrors(async (req, res, next) => {
         success: true,
         product
     })
+   } catch (error) {
+    console.log("catch error --------------------------",error)
+   }
 })
 
 exports.allProductDetails = catchAsyncErrors(async (req, res, next) => {

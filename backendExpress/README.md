@@ -1,4 +1,43 @@
- 
+ <!--node js start  -->
+
+<  !-- node js is a javascript running on the server -->
+
+<!-- when we have to use Node js 
+- node js is a non blocking , node js can accept multiple request and becouse of that it is a non blocking
+
+- input/output bound
+- data streaming (like netflix)
+- real time chat applcation
+
+-->
+
+<!-- what is lookup 
+
+left outer join (lookup is use for to join two tables )
+
+
+-->
+
+
+<!-- what is aggregration 
+
+it is a pipeline operation 
+
+ -->
+
+
+
+
+<!-- node js end -->
+
+
+
+
+
+
+
+
+
 <!-- run your backend go to the backendExpress and
  run  -> "node app.js" 
  run -> "nodemon app.js"
