@@ -1,6 +1,7 @@
 
 const Comments = require("../model/comments")
 const catchAsyncErrors = require("../middleware/catchAsynErrors");
+const Users = require("../model/registor")
 const { ObjectId } = require('bson');
 
 
@@ -8,7 +9,7 @@ exports.commentDetails = catchAsyncErrors(async (req, res, next) => {
     const { comment_message,
         user_id,
         product_id,
-        parent_id } = req.body
+        parent_id ,createdBy} = req.body
     console.log("smdvjsd----------", parent_id)
 
     const commentData = await Comments.create({
@@ -16,6 +17,7 @@ exports.commentDetails = catchAsyncErrors(async (req, res, next) => {
         user_id,
         product_id,
         parent_id,
+        createdBy,
         paidAt: Date.now(),
     })
 
@@ -29,7 +31,7 @@ exports.commentDetails = catchAsyncErrors(async (req, res, next) => {
 exports.getCommentDetails = catchAsyncErrors(async (req, res, next) => {
 
     let productId = req.query.product_id
-    var CommentsAllDetails = await Comments.aggregate([
+    var commentsAllDetails = await Comments.aggregate([
         {
 
             '$match': {
@@ -48,7 +50,7 @@ exports.getCommentDetails = catchAsyncErrors(async (req, res, next) => {
                 'userDetails': {
                     '$first': '$userDetails.email'
                 },
-                'user_name': {
+                'name': {
                     '$first': '$userDetails.name'
                 }
             }
@@ -74,13 +76,12 @@ exports.getCommentDetails = catchAsyncErrors(async (req, res, next) => {
               }
         }
     ])
- 
-
-
+    
+   let response = await Users.populate(commentsAllDetails, {path: "replyChat.user_id"});
 
     res.status(201).json({
         success: true,
-        CommentsAllDetails 
+        CommentsAllDetails:response 
     })
 
 

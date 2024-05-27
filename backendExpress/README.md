@@ -26,6 +26,14 @@ it is a pipeline operation
  -->
 
 
+<!-- mongodb shell
+first check the db (data base name )
+for select data base name "use "data base name" "
+ for delete all:db.comments.deleteMany({})
+
+ -->
+
+
 
 
 <!-- node js end -->

@@ -122,30 +122,30 @@ const ProductDetails = () => {
     const CommentSubmitFun = async (e, items) => {
 
 
-        console.log("skjdhjskdbsd", viewCommentToggle)
+
 
         if (commentReplyValue?.replyeValue === false) {
-            const payload =
+            const parentCommentPayload =
             {
                 "comment_message": commentValue,
                 "user_id": userId,
                 "product_id": items?._id,
                 "parent_id": ""
             }
-            dispatch(PostComment(payload))
+            dispatch(PostComment(parentCommentPayload))
 
         }
         else {
 
-            const payloadd =
+            const childCommentPayload =
             {
                 "comment_message": commentValue,
                 "user_id": userId,
                 "product_id": items?._id,
-                "parent_id": commentReplyValue?.replyDataItem?._id
+                "parent_id": commentReplyValue?.childReplyDataItem?._id == undefined ? commentReplyValue?.parentReplyDataItem?._id : commentReplyValue?.childReplyDataItem?.parent_id,
+                "createdBy": userId
             }
-            console.log("skjdhjskdbsd", payloadd)
-            dispatch(PostComment(payloadd))
+            dispatch(PostComment(childCommentPayload))
 
         }
 
@@ -184,6 +184,8 @@ const ProductDetails = () => {
 
     const ReplyFun = (e, items, Comment_item) => {
 
+        console.log("sndgsdsdds", items, Comment_item)
+
         setViewCommentToggle(
             {
                 "viewComment": items?._id,
@@ -191,12 +193,33 @@ const ProductDetails = () => {
             }
         )
 
-        setCommentReplyValue({
-            "replyeValue": true,
-            "replyDataItem": Comment_item
-        })
-        setMentionReplyValue(`@${Comment_item.user_name}`)
-        setCommentValue(`@${Comment_item.user_name}`)
+
+
+
+
+
+
+        if (Comment_item.name == undefined) { //child 
+
+            setMentionReplyValue(`@${Comment_item?.user_id?.name}`)
+            setCommentValue(`@${Comment_item?.user_id?.name}`)
+            setCommentReplyValue({
+                "replyeValue": true,
+                "childReplyDataItem": Comment_item
+            })
+
+        }
+        else {// parent
+            setMentionReplyValue(`@${Comment_item.name}`)
+            setCommentValue(`@${Comment_item.name}`)
+
+            setCommentReplyValue({
+                "replyeValue": true,
+                "parentReplyDataItem": Comment_item
+            })
+
+        }
+
 
 
     }
@@ -251,11 +274,11 @@ const ProductDetails = () => {
                                         {items?.product_image?.split(".")[3] != "mp4" ? <img className="bg-danger fw-bolder" src={items?.product_image} />
                                             :
                                             <>
-                                            {/* <iframe>  */}
-                                    {/* // src="https://www.youtube.com/embed/zy5oXOxzvGA?autoplay=1&mute=1" className="w-100"> */}
-                                
-                                                <video width="250" height="290" controls loop  muted autoPlay >
-                                                    <source src={`${items?.product_image}`} type="video/mp4"/> 
+                                                {/* <iframe>  */}
+                                                {/* // src="https://www.youtube.com/embed/zy5oXOxzvGA?autoplay=1&mute=1" className="w-100"> */}
+
+                                                <video width="250" height="290" controls loop muted autoPlay >
+                                                    <source src={`${items?.product_image}`} type="video/mp4" />
                                                 </video>
                                                 {/* </iframe> */}
                                             </>
@@ -354,9 +377,20 @@ const ProductDetails = () => {
                                                     return <li className="  comment-list"  >
                                                         <div className=" ">
                                                             <p className="user-name ">
-                                                                {Comment_item?.user_name}
-                                                            </p> <p className="user-message">
-                                                                {Comment_item?.comment_message}</p>
+                                                                {Comment_item?.name}
+                                                            </p>
+
+                                                            <p className="user-message">
+                                                                {Comment_item?.comment_message}
+                                                                <span className="red-heart ">
+                                                                    ❤️
+                                                                </span >
+                                                                <span className="white heart">
+                                                                    ♡
+                                                                </span>
+
+
+                                                            </p>
                                                         </div>
                                                         <p className="reply-text" onClick={(e) => ReplyFun(e, items, Comment_item)}> Reply.. </p>
 
@@ -379,10 +413,32 @@ const ProductDetails = () => {
                                                                     return <li className="  comment-list"  >
                                                                         <div className=" ">
                                                                             <p className="user-name ">
-                                                                                {reply_item?.comment_message}
+                                                                                {reply_item?.user_id?.name}
                                                                             </p>
-                                                                            {/* <p className="user-message">
-                                                                            {Comment_item?.comment_message}</p> */}
+                                                                            <p className="user-message">
+                                                                                {reply_item?.comment_message}
+
+                                                                                <span className="red-heart ">
+                                                                                    ❤️
+                                                                                </span >
+                                                                                <span className="white heart">
+                                                                                    ♡
+                                                                                </span>
+
+                                                                            </p>
+
+                                                                            <div className="main-child-reply">
+
+                                                                                <div className="child-like">
+                                                                                    likes
+                                                                                </div>
+
+                                                                                <div className="child-reply" onClick={(e) => ReplyFun(e, items, reply_item
+                                                                                )}>
+                                                                                    Reply
+                                                                                </div>
+
+                                                                            </div>
 
                                                                         </div>
 

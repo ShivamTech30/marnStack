@@ -10,7 +10,8 @@ const comments = new Schema({
     },
     user_id: {
         type: Schema.Types.ObjectId,
-        required: true
+        required: true,
+        ref:"Register"
     },
     product_id: {
         type: Schema.Types.ObjectId,
@@ -23,7 +24,10 @@ const comments = new Schema({
         // default: null
         // required: true 
     },
-
+     
+    interests: ["Register"],
+    createdBy: { type: Schema.Types.ObjectId},
+    // eventsAttended: [{ type: Schema.Types.ObjectId, ref: 'Register' }]
 }, {
     timestamps: true
 })
