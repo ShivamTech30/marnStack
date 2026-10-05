@@ -1,3 +1,4 @@
+global.SlowBuffer = global.Buffer;
 require('dotenv').config();
 const express = require("express")
 const app = express()
@@ -24,11 +25,11 @@ const redisClient = redis.createClient(6379, "127.0.0.1")
 
 
 // check redis is connected or not 
-redisClient.connect()
+// redisClient.connect().catch(console.error)
 
-redisClient.on("connect", function (error) {
-    console.log("redis is connecetd")
-})
+// redisClient.on("connect", function (error) {
+//     console.log("redis is connecetd")
+// })
 
 
 const register = require("./src/routers/_routes")
