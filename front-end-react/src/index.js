@@ -11,7 +11,7 @@ import 'react-date-range/dist/theme/default.css';
 import { Provider } from "react-redux";
 import store from "./Redux/store";
 // import * as Sentry from "@sentry/react";
-import { BrowserTracing } from "@sentry/tracing";
+// import { BrowserTracing } from "@sentry/tracing";
 
 // process.env.NODE_ENV === "production
 //  && 

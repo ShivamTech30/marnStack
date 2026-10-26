@@ -83,7 +83,6 @@ const stateData = {
   PostCreateTicketData: [],
   PostTicketDetailData: [],
   DeleteSupportTicketData: [],
-  PostTrackingOrderDetails: "",
   PostBillingCodRemittanceCountData: [],
   PostBillingCodRemittanceDetailsData: [],
   HeaderToggleClassAddData: "",

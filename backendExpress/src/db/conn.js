@@ -1,13 +1,35 @@
-const mongoose =require ("mongoose")
-mongoose.set("strictQuery",false)
+const mongoose = require("mongoose");
+mongoose.set("strictQuery", false);
 
+let isConnecting = null;
 
-// mongoose.connect("mongodb+srv://EcommerceWeb:EcommerceWeb123@cluster0.rqasgf4.mongodb.net/Ecommerce")
-const mongoURI = process.env.MONGO_URI || `mongodb://localhost:27017/${process.env.DATABASE_NAME}`;
+const connectDB = async () => {
+    if (mongoose.connection.readyState === 1) {
+        return mongoose.connection;
+    }
 
-mongoose.connect(mongoURI)
-.then((e)=>{
-    console.log(`connected database successfully`)
-}).catch((e)=>{
-    console.log("not connected", e)
-})
+    if (isConnecting) {
+        return isConnecting;
+    }
+
+    const mongoURI = process.env.MONGO_URI || process.env.DB_URI || `mongodb://127.0.0.1:27017/${process.env.DATABASE_NAME || "Ecommerce"}`;
+
+    isConnecting = mongoose.connect(mongoURI, {
+        serverSelectionTimeoutMS: 5000,
+    }).then((conn) => {
+        isConnecting = null;
+        console.log(`Database connected successfully: ${conn.connection.host}`);
+        return conn;
+    }).catch((err) => {
+        isConnecting = null;
+        console.error("Database connection error:", err.message);
+        throw err;
+    });
+
+    return isConnecting;
+};
+
+// Initial connection attempt
+connectDB().catch(() => {});
+
+module.exports = connectDB;

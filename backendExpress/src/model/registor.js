@@ -1,58 +1,41 @@
-const mongoose = require("mongoose")
-// const validation= require("validation") 
-const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken")
-
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const Schema = mongoose.Schema;
 const employeeSchema = new Schema({
-
-    name: { type: String, required: true },
-    number: { type: Number, required: true, min: 10 },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true, },
-    confirmpassword: { type: String, required: true, }, 
-    role:[{type: String}]
-        // tokens: [{ token: { type: String, required: true, } }]
-})
-
- 
-
+    name: { type: String, required: true, trim: true },
+    number: { type: Number, required: true },
+    email: { type: String, required: true, unique: true, lowercase: true, trim: true },
+    password: { type: String, required: true },
+    confirmpassword: { type: String, required: true },
+    role: [{ type: String, default: "USER" }],
+    paidAt: { type: Date, default: Date.now }
+});
 
 // generate token
-
 employeeSchema.methods.generateAuthToken = async function () {
     try {
-
-        const tokenData = jwt.sign({ _id: this._id.toString() }, process.env.SECRET_KEY)
-        // this.tokens = this.tokens.concat({ token: tokenData })
-        // this.tokens[0].token = tokenData
-        await this.save()
-        return tokenData
-
-
+        const secretKey = process.env.SECRET_KEY || "asdfghjklasdfghjlqasdfghjklasdfghjkl";
+        const tokenData = jwt.sign({ _id: this._id.toString() }, secretKey);
+        return tokenData;
     } catch (error) {
-
-        console.log(" ,jshjhgjdhgjh ", error)
+        console.error("Error generating auth token:", error);
+        throw error;
     }
-}
+};
 
-
-
-
-
-
-// convert password into hash 
-
-employeeSchema.pre("save", async function (next) {
-
+// convert password into hash before saving
+employeeSchema.pre("save", async function () {
     if (this.isModified("password")) {
-        this.password = await bcrypt.hash(this.password, 10)
-        this.confirmpassword = await bcrypt.hash(this.confirmpassword, 10)
+        this.password = await bcrypt.hash(this.password, 10);
+        this.confirmpassword = this.password;
     }
+    if (this.email) {
+        this.email = this.email.toLowerCase().trim();
+    }
+});
 
-})
+const Register = mongoose.model("Register", employeeSchema);
 
-const Register = mongoose.model("Register", employeeSchema) 
-
-module.exports = Register 
+module.exports = Register; 
