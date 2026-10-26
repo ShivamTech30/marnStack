@@ -1643,7 +1643,7 @@ ol {
 .custom-file-input::before {
   content: 'Select files';
   display: inline-block;
-  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  background: linear-gradient(to bottom, #f9f9f9, #e3e3e3);
   border: 1px solid #999;
   border-radius: 3px;
   padding: 5px 8px;
@@ -1661,7 +1661,7 @@ ol {
 }
 
 .custom-file-input:active::before {
-  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+  background: linear-gradient(to bottom, #e3e3e3, #f9f9f9);
 }
 
 
@@ -3581,7 +3581,7 @@ css-1hb7zxy-IndicatorsContainer
 
 .sptitle {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   margin-top: 10px;
 }
 
@@ -5283,7 +5283,7 @@ css-1hb7zxy-IndicatorsContainer
 
   .adminheader-bar>.right-part>ul {
     width: 100%;
-    justify-content: end;
+    justify-content: flex-end;
   }
 
   .adminheader-bar>.right-part>ul li:first-child>div {
